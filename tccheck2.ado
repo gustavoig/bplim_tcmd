@@ -7,7 +7,7 @@ if "`verbose'" == "verbose" {
 	di ""
 	di "------------------------ begin tccheck2.ado ----------------------------"
 	di ""
-	di "Creates graphs with the evolution of a collapsed variable over time, drawing areas for potential inconsistent patterns of type 2"
+	di "Creates graphs with the evolution of a collapsed variable over time, drawing areas for potential inconsistent patterns of type 1"
 }
 ******************************************************************************************
 
@@ -405,7 +405,7 @@ tokenize `varlist'
 
 		// graph
 		//local title "`by' = `item'"
-		local f: variable lable `3'
+		local f: variable label `3'
 		quietly line `3' `tvar', `xline_command' xlabel(`min'(`step')`max', angle(`langle')) ylabel(, angle(`yangle')) ytitle("") title("`f'")
 		quietly graph export graphs/tc2_`3'.png, replace
 		if "`path'" != "" {
@@ -414,7 +414,7 @@ tokenize `varlist'
 	}
 	else {
 		//di "No time inconsistencies found"
-		local f: variable lable `3'
+		local f: variable label `3'
 		quietly line `3' `tvar', xlabel(`min'(`step')`max', angle(`langle')) ylabel(, angle(`yangle')) ytitle("") title("`f'") 
 		quietly graph export graphs/tc2_`3'.png, replace
 		if "`path'" != "" {
