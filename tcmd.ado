@@ -1,4 +1,4 @@
-*! 0.1.0 Gustavo Iglésias 13dec2018
+*! 1.0.0 Gustavo Iglésias 13dec2018
 * Programmed by Gustavo Iglésias
 * Dependencies:
 * panelstat (version 3.46 27nov2018)
@@ -45,6 +45,14 @@ quietly xtset `pvar' `tvar'
 
 capture label language en
 
+// local with the name of the dta_file without the path and .dta
+
+local dta_file = subinstr("${S_FN}","\","/",100)
+local dta_file = subinstr("`dta_file'",".dta","",1)
+local len = length("`dta_file'")
+loca pos = strrpos("`dta_file'","/")
+global dta_file = substr("`dta_file'",`pos'+1,`len'-`pos')
+
 
 // rownames to use when using ado exceltomata 
 levelsof(`tvar'), local(levels)
@@ -71,6 +79,13 @@ if "`basic'" == "" {
 	if "`tccheck'" != "" {
 		readtccheck, tccheck(`tccheck') `verbose'
 		local vars = "`r(vars)'"
+		if "`vars'" != "_all" {
+			local vars = "`vars'"
+		}
+		else {
+			quietly ds `pvar' `tvar', not
+			local vars = "`r(varlist)'"
+		}
 	}
 
 	if "`verbose'" == "verbose" {
@@ -93,6 +108,7 @@ if "`basic'" == "" {
 	file write myfile _n
 	file write myfile "# <span style=§color:black§>**Characterization of the panel dataset `s §${S_FN}§`**</span>" _n
 	file write myfile _n
+	file write myfile "## Dataset: `s §${dta_file}§`" _n
 	file write myfile "## Date: `s §`c(current_date)'§`"_n
 	file write myfile "## Time: `s §`c(current_time)'§`"_n
 
@@ -366,6 +382,13 @@ if "`basic'" == "" {
 	if `"`tccheck'"' != "" {
 		readtccheck, tccheck(`tccheck') `verbose'
 		local vars = "`r(vars)'"
+		if "`vars'" != "_all" {
+			local vars = "`vars'"
+		}
+		else {
+			quietly ds `pvar' `tvar', not
+			local vars = "`r(varlist)'"
+		}
 		foreach var in `vars' {
 		
 			************************************* verbose ********************************************
@@ -385,6 +408,13 @@ else {
 	if `"`tccheck'"' != "" {
 		readtccheck, tccheck(`tccheck') `verbose'
 		local vars = "`r(vars)'"
+		if "`vars'" != "_all" {
+			local vars = "`vars'"
+		}
+		else {
+			quietly ds `pvar' `tvar', not
+			local vars = "`r(varlist)'"
+		}
 		foreach var in `vars' {
 			
 			************************************* verbose ********************************************

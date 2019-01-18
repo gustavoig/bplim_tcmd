@@ -44,7 +44,7 @@ General Options
 
 tccheck_options
 
-{p 4 8}{opt vars(var1,var2,...)} specify variables for which the analysis will be performed.
+{p 4 8}{opt vars(var1,var2,...)} specify variables for which the analysis will be performed. Input "_all" in order to perform the analysis for all the variables except panelvar and timevar.
 
 {p 4 8}{opt rlvc} to display relative changes instead of absolute changes in graphs with mean and median values of the collapsed variable. These graphs are not the same as the
 ones reported in the pattern analysis.

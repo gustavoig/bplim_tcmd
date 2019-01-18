@@ -109,18 +109,19 @@ if "`verbose'" == "verbose" {
 
 * vars
 
-capture confirm variable `vars'
-if _rc != 0 {
-	di as error "One or more variable for option vars were not found in the dataset"
-	error 1
-}
-else {
-	if "`verbose'" == "verbose" {
-		di ""
-		di "No input errors for option vars"
+if "`vars'" != "_all" {
+	capture confirm variable `vars'
+	if _rc != 0 {
+		di as error "One or more variable for option vars were not found in the dataset"
+		error 1
+	}
+	else {
+		if "`verbose'" == "verbose" {
+			di ""
+			di "No input errors for option vars"
+		}
 	}
 }
-
 * graph 
 
 /*

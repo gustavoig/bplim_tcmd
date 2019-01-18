@@ -140,7 +140,7 @@ file write myfile1 _n
 local labelvar: var label `var'
 file write myfile1 "# <span style=§color:black§>**Time analysis for `labelvar' (`var')**</span>" _n
 file write myfile1 _n
-file write myfile1 "## Dataset: `s §${S_FN}§`" _n
+file write myfile1 "## Dataset: `s §${dta_file}§`" _n
 file write myfile1 "## Date: `s §`c(current_date)'§`"_n
 file write myfile1 "## Time: `s §`c(current_time)'§`"_n
 
@@ -378,7 +378,7 @@ if `"`tccheck'"' != "" {
 		}
 	}
 	if "`ptrn'" == "" {
-		file write myfile1 "#### Pattern 1: captures relative changes above the threshold specified by the user" _n
+		file write myfile1 "#### Pattern 1: captures relative changes above the threshold specified by the user (`thr' %)" _n
 		file write myfile1 _n
 		file write myfile1 "!!!s/"_n
 		file write myfile1 "preserve"_n
@@ -419,7 +419,7 @@ if `"`tccheck'"' != "" {
 		
 		file write myfile1 _n
 		
-		file write myfile1 "#### Pattern 2: captures relative increases (decreases) above the threshold followed by a `tvar' (consecutive or non-consecutive) with a relative decrease (increase) above the threshold" _n
+		file write myfile1 "#### Pattern 2: captures relative increases (decreases) above the threshold followed by a `tvar' (consecutive or non-consecutive) with a relative decrease (increase) above the threshold  (`thr' %)" _n
 		file write myfile1 _n
 		file write myfile1 "!!!s/"_n
 		file write myfile1 "preserve"_n
@@ -459,7 +459,7 @@ if `"`tccheck'"' != "" {
 		}
 	}
 	else if "`ptrn'" == "1" {
-		file write myfile1 "#### Pattern 1: captures relative changes above the threshold specified by the user" _n
+		file write myfile1 "#### Pattern 1: captures relative changes above the threshold specified by the user (`thr' %)" _n
 		file write myfile1 _n
 		file write myfile1 "!!!s/"_n
 		file write myfile1 "preserve"_n
@@ -499,7 +499,7 @@ if `"`tccheck'"' != "" {
 		}
 	}
 	else if "`ptrn'" == "2" {
-		file write myfile1 "#### Pattern 2: captures relative increases (decreases) above the threshold followed by a `tvar' (consecutive or non-consecutive) with a relative decrease (increase) above the threshold" _n
+		file write myfile1 "#### Pattern 2: captures relative increases (decreases) above the threshold followed by a `tvar' (consecutive or non-consecutive) with a relative decrease (increase) above the threshold (`thr' %)" _n
 		file write myfile1 _n
 		file write myfile1 "!!!s/"_n
 		file write myfile1 "preserve"_n
